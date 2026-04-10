@@ -54,6 +54,9 @@
   max-width: 800px;
   width: 100%;
   animation: fadeUp 1s ease both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @keyframes fadeUp {
@@ -167,6 +170,27 @@
   }
   .title {
     font-size: 2.5rem;
+    order: 1;
+    margin-bottom: 4px;
+  }
+  .eyebrow {
+    order: 2;
+    margin-top: 8px;
+    margin-bottom: 24px;
+  }
+  .sloganWrap {
+    order: 3;
+    width: 100%;
+  }
+  .description {
+    order: 4;
+  }
+  .actions {
+    order: 5;
+    margin-bottom: 30px;
+  }
+  .stats {
+    order: 6;
   }
 }
 

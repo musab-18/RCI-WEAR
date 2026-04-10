@@ -48,15 +48,18 @@
   text-align: left;
 }
 .brandName {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-primary);
   line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 .brandSub {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 11px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--gold);
