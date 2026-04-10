@@ -163,11 +163,7 @@
   }
   .statDivider { display: none; }
   .logoWrap {
-    margin-bottom: 30px;
-  }
-  .logoCircle {
-    width: 250px;
-    height: 250px;
+    display: none;
   }
   .title {
     font-size: 2.5rem;

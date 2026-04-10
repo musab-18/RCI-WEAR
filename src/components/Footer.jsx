@@ -61,6 +61,10 @@ export default function Footer() {
                 Mon–Sat: 9:00 AM – 7:00 PM
               </p>
             </div>
+            
+            <div style={{ marginTop: '32px' }}>
+              <img src="/chamber.png" alt="Sialkot Chamber of Commerce & Industry" style={{ height: '42px', objectFit: 'contain', opacity: 0.95, backgroundColor: 'white', padding: '6px 12px', borderRadius: '4px' }} />
+            </div>
           </div>
         </div>
 
@@ -68,7 +72,7 @@ export default function Footer() {
           <p className={styles.copy}>
             © {new Date().getFullYear()} Rasheed Clothing International. All Rights Reserved.
           </p>
-          <p className={styles.made}>Created by Musab Iftikhar | +92 3708316591</p>
+          <p className={styles.made}>Created by Musab Iftikhar | musabiftikhar44@gmail.com | +92 3708316591</p>
         </div>
       </div>
     </footer>

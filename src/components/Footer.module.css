@@ -24,7 +24,7 @@
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-.logoImg { width: 26px; height: 26px; object-fit: contain; }
+.logoImg { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 .brandName {
   font-family: 'Playfair Display', serif;
   font-size: 15px;

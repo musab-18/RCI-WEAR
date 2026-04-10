@@ -71,6 +71,14 @@ export default function About() {
               you feel extraordinary.
             </p>
 
+            <div style={{ marginTop: '28px', display: 'flex', alignItems: 'center', gap: '16px', padding: '12px 16px', background: 'var(--dark-3)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', width: 'fit-content' }}>
+              <img src="/chamber.png" alt="Sialkot Chamber of Commerce & Industry" style={{ height: '40px', objectFit: 'contain', backgroundColor: 'white', padding: '6px', borderRadius: '4px' }} />
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontFamily: 'Inter, sans-serif', textTransform: 'uppercase', letterSpacing: '1px' }}>Approved Member</span>
+                <span style={{ fontSize: '14px', color: 'var(--text-primary)', fontFamily: 'Inter, sans-serif', fontWeight: '500' }}>Sialkot Chamber of Commerce</span>
+              </div>
+            </div>
+
             <div className={styles.values}>
               {values.map((v, i) => (
                 <div key={i} className={styles.valueCard} style={{ animationDelay: `${i * 0.1}s` }}>
