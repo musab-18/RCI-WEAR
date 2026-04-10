@@ -1,0 +1,143 @@
+.about { background: var(--dark-2); }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* ── Visual ── */
+.visual { position: relative; }
+.imageOuter { position: relative; display: inline-block; width: 100%; }
+.imageInner {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  border: 1px solid var(--border);
+  background: var(--dark-3);
+  position: relative;
+}
+.imagePlaceholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.placeholderIcon { width: 80px; height: 80px; }
+.imagePlaceholder span { color: var(--gold); opacity: 0.5; }
+
+/* Sheen animation on hover */
+.imageInner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(201,168,76,0.08) 60%, transparent 80%);
+  transform: translateX(-100%);
+  transition: 0.8s ease;
+}
+.imageOuter:hover .imageInner::after { transform: translateX(100%); }
+
+.accentBox {
+  position: absolute;
+  bottom: -24px;
+  right: -24px;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 60px rgba(201,168,76,0.3);
+}
+.accentYear {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dark);
+  font-weight: 600;
+}
+.accentNum {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1;
+}
+
+/* ── Text ── */
+.body {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  font-size: 0.97rem;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.valueCard {
+  background: var(--glass-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: var(--transition);
+  opacity: 0;
+  transform: translateY(20px);
+}
+.visible .valueCard {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color var(--transition), box-shadow var(--transition);
+}
+.valueCard:hover {
+  border-color: rgba(201,168,76,0.4);
+  box-shadow: 0 8px 30px rgba(201,168,76,0.08);
+}
+.valueIcon {
+  font-size: 1.4rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.valueTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  font-family: 'Inter', sans-serif;
+}
+.valueDesc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; gap: 48px; }
+  .accentBox { bottom: -16px; right: -8px; width: 80px; height: 80px; }
+  .accentNum { font-size: 20px; }
+}
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; gap: 40px; }
+  .accentBox { bottom: -15px; right: 15px; padding: 15px 25px; }
+}
+@media (max-width: 500px) {
+  .values { grid-template-columns: 1fr; }
+}

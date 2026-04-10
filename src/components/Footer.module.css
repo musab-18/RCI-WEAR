@@ -1,0 +1,106 @@
+.footer {
+  background: var(--dark-2);
+  position: relative;
+}
+.topDivider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  padding: 64px 0 48px;
+}
+
+/* Brand */
+.logoRow { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.logoCircle {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  background: var(--dark-3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logoImg { width: 26px; height: 26px; object-fit: contain; }
+.brandName {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+.brandSub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.brandDesc {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 16px;
+  max-width: 320px;
+}
+.slogan {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+/* Columns */
+.colTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.navList { display: flex; flex-direction: column; gap: 10px; }
+.navLink {
+  background: none; border: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+  padding: 0;
+}
+.navLink:hover { color: var(--gold); padding-left: 6px; }
+
+/* Contact */
+.contactList { display: flex; flex-direction: column; gap: 14px; }
+.contactLink {
+  display: flex; align-items: flex-start; gap: 12px;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  line-height: 1.5;
+  transition: var(--transition);
+}
+.contactLink:hover { color: var(--gold); }
+.contactIcon { color: var(--gold); flex-shrink: 0; }
+
+/* Bottom */
+.bottom {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.copy { font-size: 12.5px; color: var(--text-muted); }
+.made { font-size: 12px; color: var(--text-muted); }
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 32px; }
+}
