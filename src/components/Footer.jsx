@@ -16,14 +16,14 @@ export default function Footer() {
       <div className="container">
         <div className={styles.grid}>
           {/* Brand */}
-          <div className={styles.brand}>
+          <div className={`${styles.brand} reveal`}>
             <div className={styles.logoRow}>
               <div className={styles.logoCircle}>
                 <img src="/logo.jpg" alt="Rasheed Clothing International" className={styles.logoImg} />
               </div>
-              <div>
-                <div className={styles.brandName}>Rasheed Clothing</div>
-                <div className={styles.brandSub}>International</div>
+              <div className={styles.brandNameWrap}>
+                <span className={styles.brandName}>Rasheed Clothing</span>
+                <span className={styles.brandSub}>International</span>
               </div>
             </div>
             <p className={styles.brandDesc}>
@@ -72,7 +72,14 @@ export default function Footer() {
           <p className={styles.copy}>
             © {new Date().getFullYear()} Rasheed Clothing International. All Rights Reserved.
           </p>
-          <p className={styles.made}>Created by Musab Iftikhar | musabiftikhar44@gmail.com </p>
+          <div className={styles.madeContainer}>
+            <p className={styles.made}>
+              Developed by <span className={styles.developer}>Musab Iftikhar</span>
+            </p>
+            <a href="mailto:musabiftikhar44@gmail.com" className={styles.madeEmail} data-cursor>
+              musabiftikhar44@gmail.com
+            </a>
+          </div>
         </div>
       </div>
     </footer>

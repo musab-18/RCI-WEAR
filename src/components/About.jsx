@@ -2,89 +2,105 @@ import { useEffect, useRef } from 'react'
 import styles from './About.module.css'
 
 const values = [
-  {
-    icon: '✦',
-    title: 'Premium Quality',
-    desc: 'Only the finest fabrics and materials make it into our creations. Every piece is a testament to excellence.',
-  },
-  {
-    icon: '✧',
-    title: 'Master Craftsmanship',
-    desc: 'Decades of skill passed through generations. Every stitch tells a story of dedication and artistry.',
-  },
-  {
-    icon: '◈',
-    title: 'Custom Designs',
-    desc: 'Your vision brought to life. We tailor each garment to your unique style, measurements, and preferences.',
-  },
-  {
-    icon: '⬡',
-    title: 'Timely Delivery',
-    desc: 'We respect your time. Our efficient production ensures your orders are delivered as promised, every time.',
-  },
+  { icon: '01', title: 'Premium Quality', desc: 'Only the finest fabrics make it into our creations. Every piece is a testament to excellence.' },
+  { icon: '02', title: 'Master Craftsmanship', desc: 'Decades of skill woven into every stitch. Traditional artistry with contemporary sensibility.' },
+  { icon: '03', title: 'Custom Designs', desc: 'Your vision brought to life. Tailored precisely to your style, measurements, and preferences.' },
+  { icon: '04', title: 'Global Delivery', desc: 'We respect your timeline. Reliable production ensures your orders arrive as promised, worldwide.' },
 ]
 
 export default function About() {
   const sectionRef = useRef(null)
+  const imgRef = useRef(null)
 
   useEffect(() => {
+    // Reveal Observer
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => e.target.classList.toggle(styles.visible, e.isIntersecting)),
-      { threshold: 0.15 }
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
+      { threshold: 0.06 }
     )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
+    const delay = setTimeout(() => {
+      sectionRef.current?.querySelectorAll('.reveal, .reveal-left, .reveal-right')?.forEach(el => observer.observe(el))
+    }, 100)
+
+    // Parallax
+    const handleScroll = () => {
+      if (!imgRef.current) return
+      const rect = sectionRef.current.getBoundingClientRect()
+      // Only parallax if section is somewhat in view
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        const yOffset = (window.innerHeight - rect.top) * 0.05
+        imgRef.current.style.transform = `translateY(${yOffset - 30}px)`
+      }
+    }
+    
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    
+    return () => { 
+      clearTimeout(delay)
+      observer.disconnect() 
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   return (
     <section id="about" className={`section ${styles.about}`} ref={sectionRef}>
       <div className="container">
         <div className={styles.grid}>
-          {/* Image / Brand visual */}
-          <div className={styles.visual}>
-            <div className={styles.imageOuter}>
-              <div className={styles.imageInner} id="about-image-area">
-                <img src="/about_img.jpg" alt="Rasheed Clothing International" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+
+          {/* Left visual */}
+          <div className={`${styles.visual} reveal-left`}>
+            <div className={styles.imageFrame} ref={imgRef} style={{ transition: 'transform 0.1s linear' }}>
+              <div className={styles.imageMain}>
+                <img src="/about_img.jpg" alt="Rasheed Clothing International craftsmanship" />
+                <div className={styles.imageSheen} />
               </div>
-              <div className={styles.accentBox}>
-                <span className={styles.accentYear}>Since</span>
-                <span className={styles.accentNum}>2017</span>
+              <div className={styles.imageAccent}>
+                <span className={styles.accentLabel}>Est.</span>
+                <span className={styles.accentYear}>2017</span>
               </div>
+              {/* Decorative corners */}
+              <div className={`${styles.frameCorner} ${styles.fcTL}`} />
+              <div className={`${styles.frameCorner} ${styles.fcBR}`} />
             </div>
           </div>
 
-          {/* Text */}
-          <div className={styles.text}>
+          {/* Right text */}
+          <div className={`${styles.text} reveal-right`}>
             <p className="section-label">Our Story</p>
             <h2 className="section-title">
-              Crafting Dreams Into <span className="gold-text">Reality</span>
+              Crafting Dreams<br/>Into <em className="gold-text" style={{ fontStyle: 'italic' }}>Reality</em>
             </h2>
             <div className="divider" />
+
             <p className={styles.body}>
-              Rasheed Clothing International was born from a passion for fashion and a relentless
-              pursuit of quality. With roots in the rich textile heritage of Pakistan, we blend
-              traditional craftsmanship with contemporary design sensibilities.
+              Rasheed Clothing International was born from a passion for fashion and a relentless pursuit of quality. With roots in the rich textile heritage of Pakistan, we blend traditional craftsmanship with contemporary design sensibilities.
             </p>
-            <p className={styles.body} style={{ marginTop: '16px' }}>
-              Whether it's a bespoke bridal ensemble, corporate uniforms, or a full ready-to-wear
-              collection, every garment that leaves our atelier is a work of art—designed to make
-              you feel extraordinary.
+            <p className={styles.body}>
+              Whether it's a bespoke bridal ensemble, corporate uniforms, or a full ready-to-wear collection — every garment is engineered to make you feel extraordinary.
             </p>
 
-            <div style={{ marginTop: '28px', display: 'flex', alignItems: 'center', gap: '16px', padding: '12px 16px', background: 'var(--dark-3)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', width: 'fit-content' }}>
-              <img src="/chamber.png" alt="Sialkot Chamber of Commerce & Industry" style={{ height: '40px', objectFit: 'contain', backgroundColor: 'white', padding: '6px', borderRadius: '4px' }} />
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontFamily: 'Inter, sans-serif', textTransform: 'uppercase', letterSpacing: '1px' }}>Approved Member</span>
-                <span style={{ fontSize: '14px', color: 'var(--text-primary)', fontFamily: 'Inter, sans-serif', fontWeight: '500' }}>Sialkot Chamber of Commerce</span>
+            {/* Chamber badge */}
+            <div className={styles.memberBadge}>
+              <div className={styles.badgeImgWrap}>
+                <img src="/chamber.png" alt="Sialkot Chamber" />
+              </div>
+              <div>
+                <span className={styles.badgeLabel}>Approved Member</span>
+                <span className={styles.badgeName}>Sialkot Chamber of Commerce</span>
               </div>
             </div>
 
+            {/* Values grid */}
             <div className={styles.values}>
               {values.map((v, i) => (
-                <div key={i} className={styles.valueCard} style={{ animationDelay: `${i * 0.1}s` }}>
-                  <span className={styles.valueIcon}>{v.icon}</span>
+                <div
+                  key={i}
+                  className={`${styles.valueItem} reveal`}
+                  style={{ transitionDelay: `${0.1 + i * 0.08}s` }}
+                >
+                  <span className={styles.valueNum}>{v.icon}</span>
                   <div>
-                    <h4 className={styles.valueTitle}>{v.title}</h4>
+                    <h4 className={styles.valueName}>{v.title}</h4>
                     <p className={styles.valueDesc}>{v.desc}</p>
                   </div>
                 </div>

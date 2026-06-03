@@ -1,106 +1,305 @@
+/* ═══════════════════════════════════════════════
+   FOOTER — Architectural Luxury Footer
+   ═══════════════════════════════════════════════ */
+
 .footer {
-  background: var(--dark-2);
+  background: #040404;
   position: relative;
+  overflow: hidden;
 }
-.topDivider {
+
+/* Top gold rule */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0.4;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--gold)  50%,
+    transparent 100%
+  );
+  opacity: 0.16;
 }
+
+/* Large background brand watermark */
+.footer::after {
+  content: 'RCI';
+  position: absolute;
+  bottom: -80px;
+  right: -40px;
+  font-family: var(--font-display);
+  font-size: clamp(12rem, 25vw, 20rem);
+  font-weight: 400;
+  color: rgba(200,169,110,0.018);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.topDivider { display: none; }
+
+/* ── Grid ── */
 .grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 60px;
-  padding: 64px 0 48px;
+  grid-template-columns: 1.8fr 1fr 1fr;
+  gap: 88px;
+  padding: 96px 0 72px;
 }
 
-/* Brand */
-.logoRow { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+/* ── Brand column ── */
+.brand { position: relative; }
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
 .logoCircle {
-  width: 44px; height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  border: 1.5px solid var(--gold);
-  background: var(--dark-3);
-  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(200,169,110,0.2);
+  background: var(--surface);
   flex-shrink: 0;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
-.logoImg { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+.logoCircle:hover {
+  border-color: rgba(200,169,110,0.45);
+  box-shadow: 0 0 24px rgba(200,169,110,0.15);
+}
+
+.logoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brandNameWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
 .brandName {
-  font-family: 'Playfair Display', serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.2;
-}
-.brandSub {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-.brandDesc {
-  font-size: 13.5px;
-  color: var(--text-muted);
-  line-height: 1.75;
-  margin-bottom: 16px;
-  max-width: 320px;
-}
-.slogan {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 14px;
-  color: var(--gold);
-  opacity: 0.7;
-}
-
-/* Columns */
-.colTitle {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
+  font-family: var(--font-sans);
+  font-size: 13px;
   font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1;
+  display: block;
 }
-.navList { display: flex; flex-direction: column; gap: 10px; }
+
+.brandSub {
+  font-family: var(--font-italic);
+  font-size: 10px;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: var(--gold);
+  opacity: 0.45;
+  display: block;
+  margin-top: 2px;
+}
+
+.brandDesc {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 2;
+  max-width: 300px;
+  margin-bottom: 24px;
+  letter-spacing: 0.1px;
+}
+
+.slogan {
+  font-family: var(--font-italic);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(200,169,110,0.25);
+  letter-spacing: 0.5px;
+}
+
+/* ── Column titles ── */
+.colTitle {
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.5;
+  margin-bottom: 32px;
+  display: block;
+}
+
+/* ── Nav links ── */
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .navLink {
-  background: none; border: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.035);
   color: var(--text-muted);
-  font-size: 14px;
-  cursor: pointer;
-  transition: var(--transition);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  padding: 13px 0;
   text-align: left;
-  padding: 0;
+  cursor: none;
+  transition:
+    color        0.35s ease,
+    padding-left 0.5s var(--ease-luxury);
+  position: relative;
+  letter-spacing: 0.2px;
 }
-.navLink:hover { color: var(--gold); padding-left: 6px; }
 
-/* Contact */
-.contactList { display: flex; flex-direction: column; gap: 14px; }
+.navLink::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 10px;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition:
+    opacity   0.3s ease,
+    transform 0.4s var(--ease-luxury);
+}
+
+.navLink:hover {
+  color: var(--text-primary);
+  padding-left: 18px;
+}
+
+.navLink:hover::before {
+  opacity: 0.5;
+  transform: translateX(0);
+}
+
+/* ── Contact list ── */
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .contactLink {
-  display: flex; align-items: flex-start; gap: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
   color: var(--text-muted);
-  font-size: 13.5px;
-  line-height: 1.5;
-  transition: var(--transition);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.035);
+  text-decoration: none;
+  transition: color 0.35s ease;
+  cursor: none;
+  letter-spacing: 0.1px;
 }
-.contactLink:hover { color: var(--gold); }
-.contactIcon { color: var(--gold); flex-shrink: 0; }
 
-/* Bottom */
+.contactLink:hover { color: var(--text-primary); }
+
+.contactIcon {
+  font-size: 13px;
+  margin-top: 1px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* ── Bottom bar ── */
 .bottom {
-  border-top: 1px solid var(--border);
-  padding: 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 32px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
 }
-.copy { font-size: 12.5px; color: var(--text-muted); }
-.made { font-size: 12px; color: var(--text-muted); }
 
-@media (max-width: 768px) {
-  .grid { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 32px; }
+.copy {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+.madeContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.made {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.developer {
+  color: var(--gold-light);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  margin-left: 6px;
+}
+
+.madeEmail {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: var(--radius-full);
+  transition: all 0.3s ease;
+  cursor: none;
+}
+
+.madeEmail:hover {
+  background: var(--gold);
+  color: var(--obsidian);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200,169,110,0.2);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .grid { gap: 56px; }
+}
+
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: 1fr 1fr; gap: 48px; padding: 72px 0 56px; }
+}
+
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; gap: 44px; padding: 56px 0 44px; }
+  .bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .footer::after { font-size: 30vw; bottom: -40px; right: -20px; }
 }

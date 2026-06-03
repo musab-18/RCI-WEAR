@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from './Contact.module.css'
+import MagneticButton from './MagneticButton'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
@@ -27,7 +28,7 @@ export default function Contact() {
     <section id="contact" className={`section ${styles.contact}`}>
       <div className="container">
         {/* Header */}
-        <div className={styles.header}>
+        <div className={`${styles.header} reveal`}>
           <p className="section-label">Reach Us</p>
           <h2 className="section-title">
             Let's Create <span className="gold-text">Together</span>
@@ -37,7 +38,7 @@ export default function Contact() {
 
         <div className={styles.grid}>
           {/* Info */}
-          <div className={styles.info}>
+          <div className={`${styles.info} reveal-left`} style={{ transitionDelay: '0.1s' }}>
             <p className={styles.infoText}>
               Have a project in mind? Whether it's a custom order, bulk requirement, or a new
               collection — we'd love to hear from you. Reach out and let's bring your vision to life.
@@ -87,49 +88,49 @@ export default function Contact() {
             <div className={styles.social}>
               <p className={styles.socialLabel}>Follow Us</p>
               <div className={styles.socialLinks}>
-                <a href="https://www.instagram.com/rasheedclothingintl?igsh=MW9zYTk1dXdjdndvdw==" target="_blank" rel="noopener noreferrer" className={styles.socialBtn}>
+                <MagneticButton className={styles.socialBtn} onClick={() => window.open('https://www.instagram.com/rasheedclothingintl?igsh=MW9zYTk1dXdjdndvdw==', '_blank')}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                </a>
-                <a href="https://www.facebook.com/share/184dG574x7/" target="_blank" rel="noopener noreferrer" className={styles.socialBtn}>
+                </MagneticButton>
+                <MagneticButton className={styles.socialBtn} onClick={() => window.open('https://www.facebook.com/share/184dG574x7/', '_blank')}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="20" height="20"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-                </a>
-                <a href="https://wa.me/923496014611" target="_blank" rel="noopener noreferrer" className={styles.socialBtn}>
+                </MagneticButton>
+                <MagneticButton className={styles.socialBtn} onClick={() => window.open('https://wa.me/923496014611', '_blank')}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="20" height="20"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-                </a>
+                </MagneticButton>
               </div>
             </div>
           </div>
 
           {/* Form */}
-          <form className={styles.form} onSubmit={submit}>
+          <form className={`${styles.form} reveal-right`} style={{ transitionDelay: '0.15s' }} onSubmit={submit}>
             <div className={styles.row}>
-              <div className={styles.field}>
+              <div className={`${styles.field} ${form.name ? styles['has-value'] : ''}`}>
                 <label className={styles.label}>Your Name</label>
                 <input name="name" value={form.name} onChange={handle} className={styles.input} placeholder="e.g. Ahmed Khan" required />
               </div>
-              <div className={styles.field}>
+              <div className={`${styles.field} ${form.email ? styles['has-value'] : ''}`}>
                 <label className={styles.label}>Email Address</label>
                 <input type="email" name="email" value={form.email} onChange={handle} className={styles.input} placeholder="you@example.com" required />
               </div>
             </div>
             <div className={styles.row}>
-              <div className={styles.field}>
+              <div className={`${styles.field} ${form.phone ? styles['has-value'] : ''}`}>
                 <label className={styles.label}>Phone Number</label>
                 <input name="phone" value={form.phone} onChange={handle} className={styles.input} placeholder="+92 300 000 0000" />
               </div>
-              <div className={styles.field}>
+              <div className={`${styles.field} ${form.subject ? styles['has-value'] : ''}`}>
                 <label className={styles.label}>Subject</label>
-                <select name="subject" value={form.subject} onChange={handle} className={styles.input}>
+                <select name="subject" value={form.subject} onChange={handle} className={`${styles.input} ${!form.subject ? styles['select-placeholder'] : ''}`}>
                   <option value="">Select a topic</option>
-                  <option>Custom Order Enquiry</option>
-                  <option>Bulk / Wholesale Order</option>
-                  <option>Bridal Collection</option>
-                  <option>Corporate Uniforms</option>
-                  <option>General Information</option>
+                  <option value="Custom Order Enquiry">Custom Order Enquiry</option>
+                  <option value="Bulk / Wholesale Order">Bulk / Wholesale Order</option>
+                  <option value="Bridal Collection">Bridal Collection</option>
+                  <option value="Corporate Uniforms">Corporate Uniforms</option>
+                  <option value="General Information">General Information</option>
                 </select>
               </div>
             </div>
-            <div className={styles.field}>
+            <div className={`${styles.field} ${form.message ? styles['has-value'] : ''}`}>
               <label className={styles.label}>Your Message</label>
               <textarea
                 name="message"

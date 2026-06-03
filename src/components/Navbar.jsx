@@ -1,76 +1,162 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import styles from './Navbar.module.css'
+import AudioPlayer from './AudioPlayer'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
+  { label: 'Collections', href: '#collections' },
   { label: 'Portfolio', href: '#portfolio' },
   { label: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [active, setActive] = useState('Home')
+  const lastY = useRef(0)
+  const navRef = useRef(null)
 
+  /* ── Scroll behavior ── */
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 60)
-    window.addEventListener('scroll', handler)
+    const handler = () => {
+      const sy = window.scrollY
+      setScrolled(sy > 40)
+      setHidden(sy > lastY.current && sy > 300)
+      lastY.current = sy
+
+      // Active detection
+      const sections = navLinks.map(l => ({
+        label: l.label,
+        el: document.querySelector(l.href)
+      })).filter(s => s.el)
+
+      let cur = sections[0]?.label || 'Home'
+      sections.forEach(({ label, el }) => {
+        if (el.getBoundingClientRect().top <= 100) cur = label
+      })
+      setActive(cur)
+    }
+
+    window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  const handleNav = (href) => {
+  /* ── Magnetic nav links ── */
+  const handleMagnet = useCallback((e) => {
+    const btn = e.currentTarget
+    const rect = btn.getBoundingClientRect()
+    const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.25
+    const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.25
+    btn.style.transform = `translate(${dx}px, ${dy}px)`
+  }, [])
+
+  const resetMagnet = useCallback((e) => {
+    e.currentTarget.style.transform = ''
+  }, [])
+
+  const handleNav = (href, label) => {
     setMenuOpen(false)
+    setActive(label)
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
+    <header
+      ref={navRef}
+      className={[
+        styles.nav,
+        scrolled ? styles.scrolled : '',
+        hidden ? styles.hidden : '',
+      ].join(' ')}
+    >
       <div className={styles.inner}>
-        {/* Logo */}
-        <button className={styles.brand} onClick={() => handleNav('#home')}>
-          <div className={styles.logoBox}>
-            <img src="/logo.jpg" alt="Rasheed Clothing International Logo" className={styles.logoImg} id="navbar-logo" />
+
+        {/* Brand */}
+        <button
+          className={styles.brand}
+          onClick={() => handleNav('#home', 'Home')}
+          data-cursor
+        >
+          <div className={styles.logoMark}>
+            <img src="/logo.jpg" alt="RCI" className={styles.logoImg} />
           </div>
           <div className={styles.brandText}>
             <span className={styles.brandName}>Rasheed Clothing</span>
-            <span className={styles.brandSub}>International</span>
+            <span className={styles.brandSub}>International · Est. 2017</span>
           </div>
         </button>
 
         {/* Desktop Nav */}
-        <nav className={styles.desktopNav}>
+        <nav className={styles.desktopNav} aria-label="Main navigation">
           {navLinks.map(l => (
-            <button key={l.label} className={styles.navLink} onClick={() => handleNav(l.href)}>
+            <button
+              key={l.label}
+              className={[styles.navLink, active === l.label ? styles.navActive : ''].join(' ')}
+              onClick={() => handleNav(l.href, l.label)}
+              onMouseMove={handleMagnet}
+              onMouseLeave={resetMagnet}
+              data-cursor
+            >
               {l.label}
+              <span className={styles.navIndicator} />
             </button>
           ))}
         </nav>
 
+        <AudioPlayer />
+
         {/* CTA */}
-        <button className={`btn-primary ${styles.cta}`} onClick={() => handleNav('#contact')}>
-          Get In Touch
+        <button
+          className={`btn-primary ${styles.navCta}`}
+          onClick={() => handleNav('#contact', 'Contact')}
+          data-cursor
+        >
+          Order Now
         </button>
 
-        {/* Hamburger */}
+        {/* Burger */}
         <button
-          className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
+          className={[styles.burger, menuOpen ? styles.burgerOpen : ''].join(' ')}
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
         >
-          <span /><span /><span />
+          <span className={styles.burgerLine} />
+          <span className={styles.burgerLine} />
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileOpen : ''}`}>
-        {navLinks.map(l => (
-          <button key={l.label} className={styles.mobileLink} onClick={() => handleNav(l.href)}>
-            {l.label}
-          </button>
-        ))}
-        <button className="btn-primary" style={{ marginTop: '16px', width: '100%', justifyContent: 'center' }} onClick={() => handleNav('#contact')}>
-          Get In Touch
-        </button>
+      {/* Mobile menu */}
+      <div
+        className={[styles.mobileMenu, menuOpen ? styles.mobileOpen : ''].join(' ')}
+        aria-hidden={!menuOpen}
+      >
+        <div className={styles.mobileMenuInner}>
+          {navLinks.map((l, i) => (
+            <button
+              key={l.label}
+              className={[styles.mobileLink, active === l.label ? styles.mobileLinkActive : ''].join(' ')}
+              onClick={() => handleNav(l.href, l.label)}
+              style={{ transitionDelay: menuOpen ? `${i * 0.06}s` : '0s' }}
+              data-cursor
+            >
+              <span className={styles.mobileLinkNum}>0{i + 1}</span>
+              <span className={styles.mobileLinkLabel}>{l.label}</span>
+              <span className={styles.mobileLinkArrow}>→</span>
+            </button>
+          ))}
+          <div className={styles.mobileCtaWrap}>
+            <button
+              className="btn-primary"
+              style={{ width: '100%', justifyContent: 'center' }}
+              onClick={() => handleNav('#contact', 'Contact')}
+            >
+              Get In Touch
+            </button>
+          </div>
+        </div>
       </div>
     </header>
   )

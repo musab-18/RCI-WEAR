@@ -1,4 +1,35 @@
-/* App-level reset – remove default Vite styles */
+/* App-level resets & overrides */
 #root {
-  min-height: 100vh;
+  isolation: isolate;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.cursor-ring.hover-text {
+  width: 72px;
+  height: 72px;
+  background: var(--gold);
+  border-color: transparent;
+  mix-blend-mode: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-text-inner {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--obsidian);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.cursor-ring.hover-text .cursor-text-inner {
+  opacity: 1;
 }
