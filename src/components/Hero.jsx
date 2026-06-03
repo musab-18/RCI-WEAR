@@ -126,11 +126,15 @@ export default function Hero() {
   }, [])
 
   /* ── Mouse parallax ── */
+  const flashlightRef = useRef(null)
+
   useEffect(() => {
     const onMove = (e) => {
       mouseRef.current = {
         x: (e.clientX / window.innerWidth - 0.5) * 2,
         y: (e.clientY / window.innerHeight - 0.5) * 2,
+        clientX: e.clientX,
+        clientY: e.clientY
       }
     }
 
@@ -143,6 +147,11 @@ export default function Hero() {
       if (bgRef.current) {
         bgRef.current.style.transform = `scale(1.06) translate(${curRef.current.x * -12}px, ${curRef.current.y * -10}px)`
       }
+      
+      if (flashlightRef.current && mouseRef.current.clientX) {
+        flashlightRef.current.style.background = `radial-gradient(800px circle at ${mouseRef.current.clientX}px ${mouseRef.current.clientY}px, rgba(200,169,110,0.08), transparent 40%)`
+      }
+      
       rafRef.current = requestAnimationFrame(tick)
     }
 
@@ -183,6 +192,9 @@ export default function Hero() {
         <div className={styles.bgImage} />
         <div className={styles.bgTint} />
       </div>
+
+      {/* Flashlight overlay */}
+      <div ref={flashlightRef} className={styles.flashlight} />
 
       {/* Cinematic grid lines */}
       <div className={styles.gridLines}>

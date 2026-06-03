@@ -41,18 +41,22 @@
   --border-hover:     rgba(200,169,110,0.38);
   --border-section:   rgba(200,169,110,0.08);
 
-  /* ── Glass ── */
+  /* ── Glass & Blur ── */
   --glass:           rgba(10,10,10,0.7);
   --glass-light:     rgba(255,255,255,0.025);
   --glass-hover:     rgba(255,255,255,0.04);
   --glass-gold:      rgba(200,169,110,0.05);
+  --blur-md:         blur(12px);
+  --blur-lg:         blur(24px);
+  --glass-border:    rgba(255,255,255,0.08);
 
-  /* ── Shadows ── */
+  /* ── Shadows & Depth ── */
   --shadow-sm:   0 4px 16px rgba(0,0,0,0.4);
   --shadow-md:   0 12px 48px rgba(0,0,0,0.55);
   --shadow-lg:   0 32px 80px rgba(0,0,0,0.7);
   --shadow-gold: 0 8px 32px rgba(200,169,110,0.2);
   --shadow-gold-lg: 0 24px 72px rgba(200,169,110,0.15);
+  --shadow-3d:   inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 20px 40px rgba(0,0,0,0.5);
 
   /* ── Radius ── */
   --radius-xs:  8px;

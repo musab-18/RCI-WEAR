@@ -46,6 +46,14 @@
     radial-gradient(ellipse 110% 110% at 50% 50%, transparent 38%, rgba(0,0,0,0.78) 100%);
 }
 
+/* ── Flashlight ── */
+.flashlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
 /* ── Cinematic grid lines ── */
 .gridLines {
   position: absolute;
@@ -413,9 +421,11 @@
     align-items: center;
     width: 100%;
   }
-  .eyebrow { justify-content: center; }
-  .tagline { justify-content: center; }
-  .taglineText { white-space: normal; text-align: center; }
+  .eyebrow { justify-content: center; width: 100%; margin-left: auto; margin-right: auto; padding-left: 6px; }
+  .eyebrowLine { display: none !important; }
+  .tagline { justify-content: center; width: 100%; margin-left: auto; margin-right: auto; }
+  .taglineBar { display: none !important; }
+  .taglineText { white-space: normal; text-align: center; width: 100%; }
   .description { text-align: center; max-width: 100%; }
   .actions { justify-content: center; }
   .stats { justify-content: center; gap: 0; flex-wrap: wrap; }

@@ -62,16 +62,17 @@
     background 0.4s ease;
 }
 
-/* Animated background fill */
 .item::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(200,169,110,0.02) 0%,
-    rgba(200,169,110,0.035) 100%
+    rgba(200,169,110,0.025) 0%,
+    rgba(200,169,110,0.04) 100%
   );
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.55s var(--ease-luxury);
