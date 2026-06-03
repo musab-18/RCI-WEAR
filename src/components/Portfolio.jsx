@@ -5,6 +5,10 @@ import LookbookModal from './LookbookModal'
 const filters = ['All', 'Hoodies', 'Tees and Essential Shorts', 'Tracksuits', 'Gymwear']
 
 const items = [
+  { id: 101, cat: 'Hoodies', title: 'Celestial Blue Zip-Up', desc: 'Blue heavyweight zip-up with white star graphics', img: '/portfolio/custom_hoodie_1.jpg', badge: 'New Arrival' },
+  { id: 102, cat: 'Hoodies', title: 'Celestial Purple Zip-Up', desc: 'Purple heavyweight zip-up with white star graphics', img: '/portfolio/custom_hoodie_2.jpg', badge: 'New Arrival' },
+  { id: 103, cat: 'Hoodies', title: 'Celestial Blue Detail', desc: 'Detailed view of the blue star zip-up hoodie', img: '/portfolio/custom_hoodie_3.png' },
+  { id: 104, cat: 'Hoodies', title: 'Celestial Purple Detail', desc: 'Detailed view of the purple star zip-up hoodie', img: '/portfolio/custom_hoodie_4.png' },
   { id: 1, cat: 'Hoodies', title: 'Dead Snake Custom', desc: 'Black hoodie with red serpent graphic', img: '/portfolio/IMG_5442.PNG', badge: 'Limited' },
   { id: 2, cat: 'Hoodies', title: 'Forever Havin Motion', desc: 'Heavyweight black hoodie with white puff print', img: '/portfolio/IMG_5441.PNG', badge: 'Signature' },
   { id: 3, cat: 'Hoodies', title: 'Jetlag Studios Signature', desc: 'Two-tone sleeve lettering with chest logo', img: '/portfolio/IMG_5440.PNG', badge: 'Premium' },
