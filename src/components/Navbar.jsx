@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import styles from './Navbar.module.css'
-import AudioPlayer from './AudioPlayer'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -104,8 +103,6 @@ export default function Navbar() {
             </button>
           ))}
         </nav>
-
-        <AudioPlayer />
 
         {/* CTA */}
         <button
