@@ -409,6 +409,7 @@
 
 @media (max-width: 1024px) {
   .content { max-width: 100%; }
+  .eyebrowLine, .taglineBar { display: none !important; }
 }
 
 @media (max-width: 768px) {
